@@ -220,3 +220,40 @@ class viewController: UITableViewController {
     }
 }
 ```
+
+Singleton Pattern
+==========
+>signleton Pattern: is objects that have only one instance, then shared over the application, and every reference to the class refers to the same instance 
+
+### When should you use it?
+
+commenly use this pattern when you want a single instance through the all application such as singleton database , singleton application object , singleton fileManager. 
+
+you can user it for modifing configuration around the whole application such as settings of its App , when use logging screen that logging uses for all the app 
+
+### Example:
+
+```swift
+import Foundation
+import UIKit
+
+// MARK: - Singleton Pattern
+
+ /*
+ consider that you create setting screen for your app
+ you have a listed of data in tableview and you have
+ option in setting that display this data either sequential data or random data
+ */
+
+class AppSetting {
+    
+    static let shared = AppSetting()
+    
+    private init() { }
+    
+    func getLanguage() {
+        
+    }
+}
+```
+
