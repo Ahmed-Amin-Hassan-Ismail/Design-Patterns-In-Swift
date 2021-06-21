@@ -251,9 +251,6 @@ class AppSetting {
     
     private init() { }
     
-    func getLanguage() {
-        
-    }
 }
 ```
 

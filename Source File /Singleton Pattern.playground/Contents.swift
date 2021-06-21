@@ -15,9 +15,6 @@ class AppSetting {
     static let shared = AppSetting()
     
     private init() { }
-    
-    func getLanguage() {
-        
-    }
+
 }
 
