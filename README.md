@@ -19,7 +19,6 @@ Delegate Pattern
 ### When should you use it?
 
 commenly use this pattern when you want to pass data back into previous screen, 
-
 or in general use to lead specific object to perform some tasks on behalf of certain object
 
 ### Example:
@@ -117,3 +116,107 @@ class ScreenB: UITableViewController {
 ```
 
 
+Strategy Pattern
+==========
+>stategy pattern : a family of interchangeable objects that can be set or switched at runtime .
+
+It separates into three main parts :-
+
+1- strategy protocol: it defines the methods that every strategy must be implemented 
+
+2- object using Strategy: mostly is view controller that interact with user 
+
+3- strategies: "Scenarios" objects that confirms to strategy protocol
+
+
+### When should you use it?
+
+commenly use this pattern when have many different algorithms can be changed at runtime .  simply, "when you have many scenarios with your App and needs to select which scenario would prefere instead of building complex if - else statements in view controller we can use strategy pattern to perform each scenario separately and confirm strategy protocol then display on view controller 
+
+### Example:
+
+```swift
+
+import Foundation
+import UIKit
+
+// MARK: - Strategy Pattern
+
+/*
+ consider that you have several services that present
+ 1- plain users ---> Users API
+ 2- plain employess ---> Employes API
+ 
+ instead of writing each of these services in if - else statmets it does not make sense.
+ so we will 3 objects each object is responsable for each API through comfirming Strategy protocol and in view controller can switch between them easly
+ */
+
+// 1
+protocol ServiceStrategy {
+    
+    var serviceName: String { get }
+    
+    func getService(name: String, completion: @escaping (_ success: String, _ failure: String) -> Void)
+    
+}
+
+// 2 different objects
+
+class plainUSersService: ServiceStrategy {
+    
+    var serviceName: String {
+        return "User Service"
+    }
+    
+    func getService(name: String, completion: @escaping (String, String) -> Void) {
+        
+        // Doing Network cell to get users services
+        let success = "sccuessful get users from service."
+        let failute = "opps, something went wrong whereas getting data"
+        completion(success, failute)
+    }
+}
+
+class plainEmployessService: ServiceStrategy {
+    
+    var serviceName: String {
+        return "Employee Service"
+    }
+    
+    func getService(name: String, completion: @escaping (String, String) -> Void) {
+        // Doing Network cell to get users services
+        let success = "sccuessful get employess from service."
+        let failute = "opps, something went wrong whereas getting data"
+        completion(success, failute)
+    }
+}
+
+// 3
+class viewController: UITableViewController {
+    
+    /*
+     consider in this view have
+     1- segmented controll to switch over users and employees
+     2- tableview to present data of each one
+     */
+    
+    private var strategy: ServiceStrategy?
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
+    @IBAction func segmentedAction(_ segmented: UISegmentedControl) {
+        
+        switch segmented.selectedSegmentIndex {
+        case 0 :
+            strategy = plainUSersService()
+            tableView.reloadData()
+        case 1:
+            strategy = plainEmployessService()
+            tableView.reloadData()
+        default:
+            fatalError()
+        }
+    }
+}
+```
