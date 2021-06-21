@@ -1,29 +1,3 @@
-# Design-Patterns-In-Swift
-📚 Fundamental Design Patterns
-
-You can download from here 👇. 
-
-[Design-Patterns.playground.zip](https://github.com/Ahmed-Amin-Hassan-Ismail/Design-Patterns-In-Swift.git)
-
-
-```swift
-print("Welcome!")
-print("Lets Get Start 🤟")
-```
-
-
-Delegate Pattern
-==========
->Delegate allows one object is perform specific task on behalf of another object
-
-### When should you use it?
-
-commenly use this pattern when you want to pass data back into previous screen, 
-
-or in general use to lead specific object to perform some tasks on behalf of certain object
-
-### Example:
-```swift
 
 import Foundation
 import UIKit
@@ -114,6 +88,4 @@ class ScreenB: UITableViewController {
         
     }
 }
-```
-
 
