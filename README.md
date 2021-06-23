@@ -261,7 +261,9 @@ Memento Pattern
 ### Consist of ? 
 
 1- Originator : an object want to save
+
 2- Memento: Data 
+
 3- careTaker: is responsable for saving an object (encoding, Decoding)
 
 ### When should you use it?
@@ -329,4 +331,75 @@ enum Errors: String, Error {
 }
 ```
 
+Delegate Pattern
+==========
+>let's one objecr to observe on another object.
+
+### How to use? 
+
+There are Three ways to make an observation :-  
+
+1- KVO (Key-Value-Observation) uses Objective-C  "import Foundation"
+
+2- With Native Swift ( didSet , willSet )
+
+3- Your own Observable wrapper class 
+
+
+### When should you use it?
+
+commenly use when you want to observe about property does it change 
+
+### Example:
+
+
+```swift
+import Foundation
+import UIKit
+
+// MARK: - Observer Patther
+
+// MARK: - 1. KVO ( Key - value - observation )
+
+/*
+ KVO : uses objective-c
+ this method is leading to observe the property itself at run time
+*/
+
+// 1
+
+@objcMembers class UsersObjectiveC: NSObject {
+    dynamic var name: String
+    init(name: String) {
+        self.name = name
+        super.init()
+    }
+}
+let userName = UsersObjectiveC(name: "Ahmed")
+var KVOserver: NSKeyValueObservation = userName.observe(\.name,options: [.new]) { (user, change) in
+    print("User's name is \(user.name)")
+}
+userName.name = "Amin"
+
+// MARK: -/////////////////////////////////////////////////////////
+
+// MARK: - with native swift ( didSet , willSet )
+
+// 2
+
+class UsersSwift {
+    var name: String {
+        didSet {
+            // when change the name it will be invoked
+            print("Hey i am changed with new name")
+        }
+    }
+    init(name: String) {
+        self.name = name
+    }
+}
+
+let user1 = UsersSwift(name: "Ahmed")
+user1.name = "Amin"
+```
 
